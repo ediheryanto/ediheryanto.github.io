@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FORMULIR TRIASE ESI IGD</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    </head>
+<body>
+    <div class="container table">
+        <br>
+        <form>
+            <table>
+                <tr>
+                    <th class="center-text">KASUS</th>
+                    <td><input type="checkbox" name="bedah"> Bedah</td>
+                    <td><input type="checkbox" name="nonbedah"> Non Bedah</td>
+                    <td><input type="checkbox" name="kll"> KLL</td>
+                    <td><input type="checkbox" name="anak"> Anak</td>
+                    <td><input type="checkbox" name="obstetri"> Obstetri</td>
+                    <td><input type="checkbox" name="doa"> DoA</td>
+                    <td><input type="checkbox" name="tidakada_nadi"> Tidak Ada Nadi</td>
+                    <td><input type="checkbox" name="ecg_flat"> ECG Flat</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="checkbox" name="isolasi"> Isolasi</td>
+                    <td><input type="checkbox" name="batuk_2minggu"> Batuk > 2 Minggu</td>
+                    <td><input type="checkbox" name="demam"> Demam</td>
+                    <td><input type="checkbox" name="hilang_penciuman"> Hilang Penciuman</td>
+                    <td><input type="checkbox" name="tb_mdr"> TB MDR</td>
+                    <td colspan="3"> Lainnya <input type="text" class="input-text" style="width: 81%;"></td>
+                </tr>
+                <tr>
+                    <th class="center-text">Keluhan</th>
+                    <td colspan="8"><input class="input-text" style="width: 100%;"></td>
+                </tr>
+                <tr>
+                    <th class="center-text">Alergi</th>
+                    <td>
+                        <input type="checkbox" name="alergi_tidak" id="alergi_tidak" onclick="toggleOptions()"> Tidak
+                    </td>
+                    <td>
+                        <input type="checkbox" name="alergi_ya" id="alergi_ya" onclick="toggleOptions()"> Ya
+                    </td>
+                    <td colspan="8" id="additional_options_container">
+                        <span id="additional_options" class="hidden">
+                            <input type="checkbox" name="alergi_obat" id="alergi_obat" onclick="showTextField()"> Obat
+                            <input type="checkbox" name="alergi_makanan" id="alergi_makanan" onclick="showTextField()"> Makanan
+                        </span>
+                        <span id="text_field_container" class="hidden">
+                            <input class="input-text" style="width: 82.5%;" id="additional_text" placeholder="Tuliskan detail alergi...">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="center-text">GCS</th>
+                    <td>Eye<br><input type="text" id="eye" class="input-text"></td>
+                    <td>Verbal<br><input type="text" id="verbal" class="input-text"></td>
+                    <td>Motorik<br><input type="text" id="motor" class="input-text"></td>
+                    <td>Total GCS<br><input type="text" id="totalGCS" class="input-text" readonly></td>
+                    <td>SPO2<br><input type="text" class="input-text"><span class="unit"> %</span></td>
+                    <td rowspan="4" colspan="4" class="status-emergency">LEVEL EMERGENCY</td>
+                </tr>
+                <tr>
+                    <th class="center-text">TTV</th>
+                    <td>TD Sistol<br><input type="text" id="systolic" class="input-text" oninput="calculateMAP()"><span class="unit"></span></td>
+                    <td>TD Diastol<br><input type="text" id="diastolic" class="input-text" oninput="calculateMAP()"><span class="unit"> mmHg</span></td>
+                    <td>Nadi<br><input type="text" class="input-text"><span class="unit"> X/Menit</span></td>
+                    <td>Respirasi<br><input type="text" class="input-text"><span class="unit"> X/Menit</span></td>
+                    <td>MAP<br><input type="text" id="map" class="input-text" readonly></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Suhu<br><input type="text" class="input-text"><span class="unit"> °C</span></td>
+                    <td>Sekala Nyeri<br><input type="text" class="input-text"></td>
+                    <td>Berat Badan<br><input type="text" id="weight" class="input-text" oninput="calculateBMI()"><span class="unit"> Kg</span></td>
+                    <td>Tinggi Badan<br><input type="text" id="height" class="input-text" oninput="calculateBMI()"><span class="unit"> cm</span></td>
+                    <td>IMT<br><input type="text" id="bmi" class="input-text" readonly></td>
+                </tr>
+                <tr>
+                    <th class="center-text">CRT</th>
+                    <td data-id="EMERGENCY"><input type="checkbox"> > 2 Detik </td>
+                    <td><input type="checkbox"> Tidak</td>
+                    <td>GDS<br><input type="text" class="input-text"><span class="unit"> mg/dL</span></td>
+                    <td rowspan="4" colspan="2" style="text-align: center; font-size: 20px; font-weight: bold;" id="error-message"></div>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>  
+        <div class="container table">   
+        <table>         
+            <tr>
+                <div style="text-align: center; font-size: 20px; font-weight: bold;">TIPE EMERGENCY</div>
+            </tr>
+            <table>
+                <tr>
+                    <th class="center-text">LEVEL</th>
+                    <td class="center-text">ESI 1</td>
+                    <td class="center-text">ESI 2</td>
+                    <td class="center-text">ESI 3</td>
+                    <td class="center-text">ESI 4</td>
+                    <td class="center-text">ESI 5</td>
+                    
+                </tr>
+                <tr>
+                    <th class="center-text">KODE WARNA</th>
+                    <td class="center-text" style="background-color: red; color: black;">RESUSITASI</td>
+                    <td class="center-text" style="background-color: red; color: black;">EMERGENCY</td>
+                    <td class="center-text" style="background-color: yellow; color: black;">URGENT</td>
+                    <td class="center-text" style="background-color: rgb(38, 237, 38); color: black;">NON URGENT</td>
+                    <td class="center-text" style="background-color: white; color: black;">FALSE EMERGENCY</td>
+                </tr>
+                <tr>
+                    <th class="center-text">RESPON TIME</th>
+                    <td class="center-text">SEGERA</td>
+                    <td class="center-text">10 Menit</td>
+                    <td class="center-text">30 Menit</td>
+                    <td class="center-text">60 Menit</td>
+                    <td class="center-text">120 Menit</td>
+                </tr>
+                <tr>
+                    <th class="center-text">JALAN NAFAS</th>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Sumbatan</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Ancaman</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Bebas</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Bebas</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Bebas</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Ancaman</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Bebas</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="center-text">PERNAFASAN</th>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Henti Nafas</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Normal</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Normal</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Normal</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Normal</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Bradipnoe</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Takipnoe</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Mengi</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="center-text">SIRKULASI</th>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Henti Jantung</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Nadi Teraba Lemah</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Nadi Teraba Kuat</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Frekuensi Nadi 80 - 100 x/Mnt</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Frekuensi Nadi 80 - 100 x/Mnt</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Bradikardi</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Takikardi</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> TD Sistol > 140</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Nadi Teraba Kuat</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Nadi Teraba Kuat</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Sianosis</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Sianosis</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> TD Diastol > 90</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Pucat</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> CRT > 2 Detik</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Akral Dingin</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Akral Dingin</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Hipotensi</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Hipertensi</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Intoksikasi Obat</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Gigitan Ular Beracun</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="center-text">KESADARAN</th>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> GCS <10 </td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> GCS <13 </td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> GCS 13-15</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> GCS 15</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> GCS 15</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Kejang</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Nyeri Hebat (7-8)</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Nyeri Sedang (4-6)</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Nyeri Ringan (1-3)</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Tidak Nyeri</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Tidak Ada Respon</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Disorientasi</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Gelisah</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Gelisah</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Hipoglikemi < 70 mg/dL</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Hiperglikemi > 250 mg/dL</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="center-text">SUMBER DAYA</th>
+                    <td data-id="RESUSITASI"><input type="checkbox" onchange="updateResult()"> Banyak</td>
+                    <td data-id="EMERGENCY"><input type="checkbox" onchange="updateResult()"> Banyak</td>
+                    <td data-id="URGENT"><input type="checkbox" onchange="updateResult()"> Dua</td>
+                    <td data-id="NON URGENT"><input type="checkbox" onchange="updateResult()"> Satu</td>
+                    <td data-id="FALSE EMERGENCY"><input type="checkbox" onchange="updateResult()"> Tidak Ada</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div>  
+        <div class="container tabel">   
+        <table>         
+                    <tr>
+                        <div style="text-align: center; font-size: 20px; font-weight: bold;">TANDA BAHAYA</div>
+                    </tr>
+                    <table>
+                    <tr>
+                        <th class="center-text">UMUR</th>
+                        <th class="center-text">NADI</th>
+                        <th class="center-text">RR</th>
+                        <th class="center-text">SPO2</th>
+                    </tr>
+            
+                <tbody>
+                    <tr>
+                        <td class="center-text"> < 3 Bln</td>
+                        <td class="center-text"><input type="checkbox"> >180</td>
+                        <td class="center-text"><input type="checkbox"> >50</td>
+                        <td rowspan="4" class="center-text" style="font-size: 32px; font-weight: bold;"> < 92%</td>
+                    </tr>
+                    <tr>
+                        <td class="center-text">3 Bln - 3 Thn</td>
+                        <td class="center-text"><input type="checkbox"> >160</td>
+                        <td class="center-text"><input type="checkbox"> >40</td>
+                    </tr>
+                    <tr>
+                        <td class="center-text">3 Thn - 8 Thn</td>
+                        <td class="center-text"><input type="checkbox"> >140</td>
+                        <td class="center-text"><input type="checkbox"> >30</td>
+                    </tr>
+                    <tr>
+                        <td class="center-text"> 8 Thn</td>
+                        <td class="center-text"><input type="checkbox"> >100</td>
+                        <td class="center-text"><input type="checkbox"> >20</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

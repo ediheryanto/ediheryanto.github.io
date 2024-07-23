@@ -1,0 +1,77 @@
+/* Gaya untuk input dengan sudut bundar */
+.input-text {
+    border: 1px solid #ccc; /* Warna border kotak input */
+    border-radius: 4px; /* Jarak sudut bundar */
+    padding: 10px; /* Jarak antara teks dan tepi input */
+    box-sizing: border-box; /* Memastikan padding tidak menambah ukuran elemen */
+}
+.hidden { display: none; }
+.additional-options { margin-left: 10px; }
+.container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    position: center;
+}
+th, td {
+    border: 0.5px solid #ddd;
+    padding: 6px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.container {
+    margin: 20px;
+}
+.input-text {
+    width: calc(100% - 60px);
+    box-sizing: border-box;
+    padding: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.unit {
+    display: inline-block;
+    width: 80px;
+    vertical-align: middle;
+    padding-left: 5px;
+}
+td {
+    white-space: nowrap;
+}
+.center-text {
+    text-align: center;
+    font-weight: bold;
+}
+.status-emergency {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px;
+    color: white;
+}
+.urgent {
+    background-color: yellow;
+    color: black;
+}
+.non-urgent {
+    background-color: green;
+    color: white;
+}
+.false-emergency {
+    background-color: white;
+    color: black;
+}
+.resusitasi, .emergency {
+    background-color: red;
+    color: white;
+}
+#error-message {
+    color: red;
+    margin-top: 10px;
+}
+.invalid-input {
+    background-color: red;
+    color: white;
+}
